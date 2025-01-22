@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maps</title>
+<meta name="viewport" content="width=device-width">
+
+<link rel="stylesheet" href="leaflet.css" />
+<link rel="stylesheet" href="css/donmaps-style.css" />
+<link rel="manifest" href="manifest.json" />
+
+<script src="src/leaflet.js"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+	<script src="config.js"></script>
+	<script src="src/Chart.min.js"></script>
+	<script src="src/mapInit.js"></script>
+	<script>
+		if ("serviceWorker" in navigator) {
+          window.addEventListener("load", function() {
+            navigator.serviceWorker
+              .register("/serviceWorker.js")
+              .then(res => console.log("service worker registered"))
+              .catch(err => console.log("service worker not registered", err))
+          })
+        }
+	</script>
+</body>
+</html>
+
