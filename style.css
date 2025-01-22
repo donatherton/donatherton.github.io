@@ -8,6 +8,10 @@ body {
 	box-sizing: border-box;
 }
 
+header {
+	padding: 2rem;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
