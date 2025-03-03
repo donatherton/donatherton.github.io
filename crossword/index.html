@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="An interactive crossword">
+
+		<title>Crossword</title>
+
+		<link rel="stylesheet" href="style.css">
+		<script src="xword.js"></script>
+
+	</head>
+	<body>
+		<script type="application/data" id="data">
+			{
+			"gridSize": 8, 
+			"clueList":[
+				{
+					"clueNo": 1,
+					"dir": "a",
+					"x": 0,
+					"y": 0,
+					"clue": "They're caustic, so Assistant Commissioner identifies son",
+					"solution": "ACIDS"
+				},
+				{
+					"clueNo": 5,
+					"dir": "a",
+					"x": 4,
+					"y": 1,
+					"clue": "Every drug has a church",
+					"solution": "EACH"
+				},
+				{
+					"clueNo": 6,
+					"dir": "a",
+					"x": 0,
+					"y": 2,
+					"clue": "Enterprise comms has old glue with artist",
+					"solution": "UHURA"
+				},
+				{
+					"clueNo": 7,
+					"dir": "a",
+					"x": 4,
+					"y": 3,
+					"clue": "Sign with new man",
+					"solution": "LEON"
+				},
+				{
+					"clueNo": 10,
+					"dir": "a",
+					"x": 0,
+					"y": 4,
+					"clue": "Scoffs stirred teas",
+					"solution": "EATS"
+				},
+				{
+					"clueNo": 13,
+					"dir": "a",
+					"x": 3,
+					"y": 5,
+					"clue": "Eskimo in university on interactive time",
+					"solution": "INUIT"
+				},
+				{
+					"clueNo": 14,
+					"dir": "a",
+					"x": 0,
+					"y": 6,
+					"clue": "Smell has a time for floater",
+					"solution": "BOAT"
+				},
+				{
+					"clueNo": 15,
+					"dir": "a",
+					"x": 3,
+					"y": 7,
+					"clue": "Listens to start of hotel event every day so",
+					"solution": "HEEDS"
+				},
+				{
+					"clueNo": 1,
+					"dir": "d",
+					"x": 0,
+					"y": 0,
+					"clue": "Account of posh Lawrence is sharp", 
+					"solution": "ACUTE"
+				},
+				{
+					"clueNo": 2,
+					"dir": "d",
+					"x": 2,
+					"y": 0,
+					"clue": "Tunis chaos is burnt in",
+					"solution": "INUST"
+				},
+				{
+					"clueNo": 3,
+					"dir": "d",
+					"x": 4,
+					"y": 0,
+					"clue": "Sea beast lock",
+					"solution": "SEAL"
+				},
+				{
+					"clueNo": 4,
+					"dir": "d", 
+					"x": 6,
+					"y": 0,
+					"clue": "London City hotel's round return", 
+					"solution": "ECHO"
+				},
+				{
+					"clueNo": 8,
+					"dir": "d",
+					"x": 5,
+					"y": 3,
+					"len": 5, 
+					"clue": "Alien university of Germany has a musical piece",
+					"solution": "ETUDE"
+				},
+				{
+					"clueNo": 9,
+					"dir": "d",
+					"x": 7,
+					"y": 3,
+					"clue": "Writes numer of Times Educational Supplement",
+					"solution": "NOTES"
+				},
+				{
+					"clueNo": 11,
+					"dir": "d",
+					"x": 1,
+					"y": 4,
+					"clue": "Very small thing with a cat",
+					"solution": "ATOM"
+				},
+				{
+					"clueNo": 12,
+					"dir": "d",
+					"x": 3,
+					"y": 4,
+					"clue": "Nasty knights don't stand in front of hospital!",
+					"solution": "SITH"
+				}
+			]
+		}
+		</script>
+		<header>
+
+		</header>
+		<nav>
+
+		</nav>
+		<main>
+			<section>
+				<article>
+					<div id="container">
+						<div id="xword-grid">
+
+						</div>
+						<div id="clues">
+							<div id="currentClue">
+
+							</div>
+							<div id="buttons"><button id="solve">Reveal all</button><button id="check">Check all</button></div>
+							<ul id="clue-list">
+
+							</ul>
+						</div>
+					</div>
+				</article>
+			</section>
+		</main>
+		<footer>
+
+		</footer>
+	</body>
+</html>
