@@ -1,7 +1,7 @@
 {
   "name": "DonMaps",
   "short_name": "DonMaps",
-  "start_url": "index.html",
+  "start_url": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "icons": [
