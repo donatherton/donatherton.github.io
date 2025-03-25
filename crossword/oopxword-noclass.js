@@ -1,46 +1,45 @@
-'use strict'
+'use strict';
 
 function CrossWord(data) {
-  this.data = data; 
-  this.wordList = [];
-  this.currentWord = {
+  const wordList = [];
+  const currentWord = {
     'dir': '',
     'word': []
   }
 
   this.init = () => {
-    this.makeGrid(this.data.gridSize);
-    this.data.clueList.forEach(item => this.parseJson(item));
-    this.data.clueList.forEach(item => this.clueNumber(item));
+    makeGrid(data.gridSize);
+    data.clueList.forEach(item => parseJson(item));
+    data.clueList.forEach(item => clueNumber(item));
     const grid = document.querySelector('#xword-grid');
     grid.addEventListener('click', e => {
       if (e.target.tagName === 'INPUT') {
-        this.selectWord(Number(e.target.parentElement.getAttribute('id').replace('grid-item-', '')))
+        selectWord(Number(e.target.parentElement.getAttribute('id').replace('grid-item-', '')))
       }
     });
-    grid.addEventListener('input', e => this.moveFocus(e));
-    document.querySelector('#clues').addEventListener('click', e => this.selectClue(e));
-    document.querySelector('#solve').addEventListener('click', e => this.solve(e));
-    document.querySelector('#check').addEventListener('click', e => this.check(e));
+    grid.addEventListener('input', e => moveFocus(e));
+    document.querySelector('#clues').addEventListener('click', selectClue);
+    document.querySelector('#solve').addEventListener('click', solve);
+    document.querySelector('#check').addEventListener('click', check);
   }
 
-  this.findWord = (cell) => {
+  function findWord(cell) {
     /* Finds word from cell */
-    let thisWord = [];
-    this.wordList.forEach((word) => {
+    let ord = [];
+    wordList.forEach((word) => {
       word.forEach((letter) => {
         if (letter[1] === cell) {
-          thisWord.push(word);
+          ord.push(word);
         }
       })
     })
-    return thisWord;
+    return ord;
   }
 
-  this.solve = () => {
+  function solve() {
     /* Fills in grid with answers */
     if (confirm('Reveal all solutions?')) {
-      this.wordList.forEach((item) => {
+      wordList.forEach((item) => {
         item.forEach((letter) => {
           document.querySelector('#grid-item-' + letter[1]).firstElementChild.value = letter[0];
         })
@@ -48,9 +47,9 @@ function CrossWord(data) {
     }
   }
 
-  this.check = () => {
+  function check() {
     /* Deletes wrong letters */
-    this.wordList.forEach((item) => {
+    wordList.forEach((item) => {
       item.forEach((letter) => {
         const val = document.querySelector('#grid-item-' + letter[1]).firstElementChild;
         const ans = letter[0];
@@ -61,19 +60,19 @@ function CrossWord(data) {
     })
   }
 
-  this.moveFocus = (e) => {
+  function moveFocus(e) {
     /* Moves cursor to next cell after inserting letter */
     // Only one leter in input 
     if (e.target.value.length > 1) e.target.value = e.target.value.slice(-1);
     const span = e.target.parentElement
     const cell = Number(span.getAttribute('id').replace('grid-item-', ''));
-    const diff = this.currentWord.word[1] - this.currentWord.word[0]; // Across or down?
-    if (this.currentWord.word.indexOf(cell) < this.currentWord.word.length - 1) {
+    const diff = currentWord.word[1] - currentWord.word[0]; // Across or down?
+    if (currentWord.word.indexOf(cell) < currentWord.word.length - 1) {
       document.querySelector('#grid-item-' + (cell + diff)).firstElementChild.focus();
     }
   }
 
-  this.deSelect = () => {
+  function deSelect() {
     /* Reset any previously selected words or cells */
     const tmp = document.querySelectorAll('.grid-item > input')
     tmp.forEach((item) => {
@@ -81,9 +80,9 @@ function CrossWord(data) {
     })
   }
 
-  this.clueNumber = (item) => {
+  function clueNumber(item) {
     /* Fills in the clue numbers in first cell */
-    const cell = item.y * this.data.gridSize + item.x;
+    const cell = item.y * data.gridSize + item.x;
     if (document.querySelector('#grid-item-' + cell).querySelector('.clueNo') === null) {
       document.querySelector('#grid-item-' + cell).innerHTML += '<span class="clueNo">' 
         + item.clueNo 
@@ -91,16 +90,16 @@ function CrossWord(data) {
     }
   }
 
-  this.selectWord = (cell, dir) => {
+  function selectWord(cell, dir) {
     /* Selects word in grid when clue clicked */
-    this.deSelect();
-    this.currentWord.word = [];
+    deSelect();
+    currentWord.word = [];
     let clue = [];
     let wordNum;
-    const word = this.findWord(cell);
+    const word = findWord(cell);
     // If up and down words in cell word will be 2 arrays. Cycle between them
     let tmp;
-    if (word.length === 2 && (dir === 'd' || (this.currentWord.dir === 'a' && dir !== 'a'))) {
+    if (word.length === 2 && (dir === 'd' || (currentWord.dir === 'a' && dir !== 'a'))) {
       wordNum = 1;
       tmp = 'd';
     } else {
@@ -108,23 +107,23 @@ function CrossWord(data) {
       tmp = 'a';
     }
     if (dir === undefined) {
-      this.currentWord.dir = tmp;
+      currentWord.dir = tmp;
     } else {
-      this.currentWord.dir = dir;
+      currentWord.dir = dir;
     }
     word[wordNum].forEach((letter) => {
       document.querySelector('#grid-item-' 
         + letter[1]).firstElementChild.style.boxShadow = '0 0 7px 7px #dddddd inset';
-      this.currentWord.word.push(letter[1]);
+      currentWord.word.push(letter[1]);
       clue.push(letter[0]);
     });
     // Puts clue in curentClue div
-    this.currentClue(clue.join(''));
+    currentClue(clue.join(''));
   }
 
-  this.currentClue = (clue) => {
+  function currentClue(clue) {
     /* Puts clue in curentClue div */
-    const item = this.data.clueList;
+    const item = data.clueList;
     let i = 0;
     do {
       document.querySelector('#currentClue').innerHTML = item[i].clueNo 
@@ -134,23 +133,23 @@ function CrossWord(data) {
     while (item[i-1].solution !== clue)
   }
 
-  this.selectClue = (e) => {
+  function selectClue(e) {
     /* Returns first cell of word when user clicks clue list */
     let id = e.target.getAttribute('id').split('');
     const dir = id.pop();
     id = Number(id.join(''));
-    const item = this.data.clueList;
+    const item = data.clueList;
     let i = 0;
     do {
-      const cell = item[i].y * this.data.gridSize + item[i].x;
-      this.selectWord(cell, dir);
+      const cell = item[i].y * data.gridSize + item[i].x;
+      selectWord(cell, dir);
       document.querySelector('#grid-item-' + cell).firstElementChild.focus();
       i++;
     }
     while (item[i-1].clueNo !== id || item[i-1].dir !== dir)
   }
 
-  this.makeGrid = (gridSize) => {
+  function makeGrid(gridSize) {
     /* Creates blank grid */
     document.querySelector('#xword-grid').style.gridTemplate += 'repeat(' 
       + gridSize 
@@ -164,7 +163,7 @@ function CrossWord(data) {
     }
   }
 
-  this.parseJson = (item) => {
+  function parseJson(item) {
     /* Fills in grid with input elements and creates clue list */
     let word = [];
     const clue = document.querySelector('#clue-list');
@@ -183,25 +182,25 @@ function CrossWord(data) {
       /* Iterates through solution putting input element in cell */
       if (item.dir === 'a') {
         document.querySelector('#grid-item-' 
-          + (item.y * this.data.gridSize 
+          + (item.y * data.gridSize 
             + item.x 
             + i))
           .innerHTML = '<input type="text" size="1">';
-        word.push([item.solution[i], (item.y * this.data.gridSize 
+        word.push([item.solution[i], (item.y * data.gridSize 
           + item.x + i )]);
 
       } else {
         document.querySelector('#grid-item-' 
-          + (item.y * this.data.gridSize 
+          + (item.y * data.gridSize 
             + item.x 
-            + (i * this.data.gridSize)))
+            + (i * data.gridSize)))
           .innerHTML = '<input type="text" size="1">'
-        word.push([item.solution[i], (item.y * this.data.gridSize 
+        word.push([item.solution[i], (item.y * data.gridSize 
           + item.x 
-          + (i * this.data.gridSize))]);
+          + (i * data.gridSize))]);
       }
     }
-    this.wordList.push(word);
+    wordList.push(word);
   }
 }
 
