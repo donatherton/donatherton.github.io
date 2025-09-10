@@ -35,7 +35,8 @@ float:left;
 <body>
 <button class="back_button" onclick="history.back()">Go back</button>
 <div>
-    <input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar<input type="radio" name="kind" onchange="setKind('satellite')">Satellite
+    <label><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar</label>
+    <label><input type="radio" name="kind" onchange="setKind('satellite')">Satellite</label>
 
     <input type="button" class="button" onclick="stop(); showFrame(animationPosition - 1); return;" value="&lt;" />
     <input type="button" class="button" onclick="playStop();" value="Play / Stop" />
@@ -85,7 +86,7 @@ float:left;
     var optionKind = 'radar'; // can be 'radar' or 'satellite'
 
     var optionTileSize = 256; // can be 256 or 512.
-    var optionColorScheme = 3; // from 0 to 8. Check the https://rainviewer.com/api/color-schemes.html for additional information
+    var optionColorScheme = 8; // from 0 to 8. Check the https://rainviewer.com/api/color-schemes.html for additional information
     var optionSmoothData = 1; // 0 - not smooth, 1 - smooth
     var optionSnowColors = 1; // 0 - do not show snow colors, 1 - show snow colors
 
