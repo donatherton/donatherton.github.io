@@ -59,13 +59,12 @@ float:left;
 <div id="mapid"></div>
 
 <script>
-	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-		    vars[key] = value;
-	});
 
-	var lat = vars['lat'];
-	var lon = vars['lon'];
+
+    const vars = JSON.parse(localStorage.getItem('vars'));
+
+    const { lat } = vars;
+    const { lon } = vars;
 
     var map = L.map('mapid').setView([lat, lon], 7);
 
