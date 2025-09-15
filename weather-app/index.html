@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Weather</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <link rel="manifest" href="manifest.json">
     <script src="appid.js"></script>
     <style>
@@ -14,14 +14,22 @@
         background-color: #000;
         color: #fff;
         font-size: 90%;
-        font-family: sans-serif;line-height: 1.5em;
+        font-family: sans-serif;
+        line-height: 1.5em;
         display: flex;
         flex-direction: column;
         align-items: center;
       }
+      a {
+        background-color: transparent;
+      }
       #main {
         display: inline-block;
         margin: auto;
+        padding: 10px;
+        background-image: url("PNG/fulmine.jpg");
+        background-position: center;
+        background-size: cover;
       }
       table {
         border-spacing: 0;
@@ -33,12 +41,21 @@
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
+        justify-content: center;          
         gap: 2em;
       }
       input {
         background-color: #fff;
         color: #000;
+        margin: 5px;
       }
+      label {
+        margin:20px;
+      }
+      input[type="radio"] {
+        width: 1.3em;
+        height: 1.3em;
+      } 
     </style>
   </head>
 
